@@ -1,0 +1,33 @@
+
+============= Question 3: Diffie-Hellman Key Exchange ================
+
+[Part b] Generating a 512-bit Sophie-Germain prime p...
+Sophie-Germain prime p (512 bits):
+82b32c44b193c01d6fecb56ebb1e36576fd6aa74fe16d74200095453591c42179bda66b33bb0331bc5d1f8906f9de07e380a2bb70cb665060573e90a4d56fd43
+
+Value of p' (where p = 2p' + 1):
+4159962258c9e00eb7f65ab75d8f1b2bb7eb553a7f0b6ba10004aa29ac8e210bcded33599dd8198de2e8fc4837cef03f1c0515db865b328302b9f48526ab7ea1
+
+
+[Part c] Finding a generator g of Z_p*...
+Found generator g:
+130eff9ad329d937886dc756fafb1497fba8c3944fe53e83ac476190fad58a9cafb72be7a41e58101b22de7ab22dd6137691bccc68f69c9a82ab90e6f1253330
+
+
+[Part d] Simulating Diffie-Hellman Key Exchange...
+Alice and Bob agree on public prime p and generator g.
+
+Alice's private key 'a' (secret):
+2b297e40fb3904c86e3a75c21ac0768fec94211f001aadaa539840c9d0dea00d71065b0f5a50723bba0cc40800f3071689a9c4b62d8b5977ba0735bc435aa098
+Bob's private key 'b' (secret):
+346a822788c9b215088a7140b2af85fd1bba886bceebf330c5a08b686314fd2b3ceff5419b262dbae10c73b86c194c04e0662eea62f08895b735ed9db753a14b
+Alice's public key A = g^a mod p (sent to Bob):
+72fac9279261cb6b41d28180508a5b58fa0f1b404632e0a778aecda4ffc6a658e556d28e06598775b25a9fe9c1a949530d7f009e29c31d3c1589835daebcdbee
+Bob's public key B = g^b mod p (sent to Alice):
+6d083992d79f49ea66dd2345e2297caaad63570d8c8fe1021bbebdae49f3cd9cc140c14d58ad4e5d74a8322eace6e0f71a434446ad5b5dff3e40c87842f089cb
+Alice computes shared secret (B^a mod p):
+136243b225177de511342e9aab33fa8f4773d6ed92aa44092d1e4d3089f1dcc0ec10b9ca65998c7a527b6e1778118973a677b5690b2709d1ad83396846cc6d67
+Bob computes shared secret (A^b mod p):
+136243b225177de511342e9aab33fa8f4773d6ed92aa44092d1e4d3089f1dcc0ec10b9ca65998c7a527b6e1778118973a677b5690b2709d1ad83396846cc6d67
+
+Success! Both parties computed the same common secret.

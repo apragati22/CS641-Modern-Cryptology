@@ -1,0 +1,77 @@
+
+================ Part a ========================================
+   Hash of apragati22@iitk.ac.in (h1): 
+342526c19001d115df245930b1d0df2cf48028236912b916cd18c04a514bd93c
+
+================ Part b ========================================
+    Found a 17-bit match in 29417 trials
+    Matching email: random29417@iitk.ac.in
+    Hash (h2): 34256ab1ee2925be643aa2576847383fd5b71775f2c53695a7f18aac09e738ab
+    --------------------------
+    Found a 18-bit match in 487173 trials
+    Matching email: random487173@iitk.ac.in
+    Hash (h2): 34251872324ab3f587ad653a4c48acec6b040b4e65f6abf1681c2b61bd94873d
+    --------------------------
+    Found a 21-bit match in 631711 trials
+    Matching email: random631711@iitk.ac.in
+    Hash (h2): 34252310f0e00fd3c8aa1d0e1019288668d56adf5343fd6cd916f5b3dc10eb14
+    --------------------------
+    Found a 22-bit match in 11427865 trials
+    Matching email: random11427865@iitk.ac.in
+    Hash (h2): 342524f167abb4491aa99ec5e934d3dd179e1e5e4e254270b197345cb44790da
+    --------------------------
+    Found a 23-bit match in 18746741 trials
+    Matching email: random18746741@iitk.ac.in
+    Hash (h2): 34252737d6a59a81822a47c09d0c3fb8f9cc6b0619597a945f65110929f6d464
+    --------------------------
+    Found a 24-bit match in 41686003 trials
+    Matching email: random41686003@iitk.ac.in
+    Hash (h2): 3425260eeb818321d2da4b515eaf5f9c069d1637cc3cd8195623608674fdcece
+    --------------------------
+    Found a 27-bit match in 88036010 trials
+    Matching email: random88036010@iitk.ac.in
+    Hash (h2): 342526d5b55db9760c7baa511d2c224fb66548cda34f34dc4e16766fd8708a29
+    --------------------------
+ Searched 100000000 hashes. Longest match found was 27 bits.
+
+================ Part c ========================================
+    Average calls (t) for 16-bit match = 32176
+    log2(t) = 14.9737
+
+================ Part d ========================================
+    The log2(t) is close to 16. This is expected because finding a specific 16-bit match
+    is equivalent to a partial preimage search. The probability of randomly matching 16 bits
+    is 1/2^16. Therefore, it requires roughly 2^16 average trials.
+
+================ Part e ========================================
+    Found a 16-bit collision in 83 trials
+    Email 1: random9@iitk.ac.in
+    Email 2: random83@iitk.ac.in
+    --------------------------
+    Found a 24-bit collision in 2669 trials
+    Email 1: random854@iitk.ac.in
+    Email 2: random2669@iitk.ac.in
+    --------------------------
+    Found a 32-bit collision in 54380 trials
+    Email 1: random36432@iitk.ac.in
+    Email 2: random54380@iitk.ac.in
+    --------------------------
+    Found a 40-bit collision in 1502938 trials
+    Email 1: random257521@iitk.ac.in
+    Email 2: random1502938@iitk.ac.in
+    --------------------------
+    Found a 48-bit collision in 27272175 trials
+    Email 1: random23782211@iitk.ac.in
+    Email 2: random27272175@iitk.ac.in
+    --------------------------
+  Longest collision found: 48 bits.
+
+================ Part f ========================================
+    Average calls to find 32-bit collision is (t) = 54380
+    log2(t) = 15.7308
+
+================ Part g ========================================
+    The log2(t) is close to 15.7308. This happens because of the Birthday Paradox.
+    To find any two hashes that collide in a space of size 2^32, we only need to test
+    roughly sqrt(2^32) = 2^16 candidates on average before a collision occurs.
+ Collision search is much faster than preimage search because of this paradox. For a 32-bit collision, we only need around 2^16 = 65,000 checks on average, while for a 16-bit preimage match we needed around 2^16 = 65,000 checks. This illustrates how the complexity of finding collisions grows much slower than finding specific matches.
