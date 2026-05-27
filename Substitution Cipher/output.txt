@@ -1,0 +1,868 @@
+C: $2t32\+dU:3'^!+1:ad +t:aa2(+d2t32\+dma'\\'^!H+32.23d+\ +D2\U (d+. 3+('d\3'}@\'^!+:+d2t32\+:D ^!+:+!3
+P: Secret sharing (also called secret splitting) refers to methods for distributing a secret among a gr
+
+C:  @m+ .+m:3\'t'm:^\d?+2:tU+ .+xU D+'d+:aa t:\2(+:+dU:32+ .+\U2+d2t32\"+IU2+d2t32\+t:^+}2+32t ^d\3@t\2
+P: oup of participants, each of whom is allocated a share of the secret. The secret can be reconstructe
+
+C: (+ ^a;+xU2^+:+d@..'t'2^\+^@D}23?+ .+m dd'}a;+('..232^\+\;m2d?+ .+dU:32d+:32+t D}'^2(+\ !2\U23X+'^('5
+P: d only when a sufficient number, of possibly different types, of shares are combined together; indiv
+
+C: '(@:a+dU:32d+:32+ .+^ +@d2+ ^+\U2'3+ x^"
+P: idual shares are of no use on their own.
+
+C: 
+P: 
+
+C: 
+P: 
+
+C: *ma3T}d!>UDx^;.5(2\b: t'0@
+P: kplrjbsgqhmwnyfvdetzaocixu
+
+C: 
+P: 
+
+C: w^+ ^2+\;m2+ .+d2t32\+dU:3'^!+dtU2D2+\U232+'d+ ^2+(2:a23+:^(+^+ma:;23d"+IU2+(2:a23+!'52d+:+dU:32+ .+
+P: In one type of secret sharing scheme there is one dealer and n players. The dealer gives a share of 
+
+C: \U2+d2t32\+\ +\U2+ma:;23d?+}@\+ ^a;+xU2^+dm2t'.'t+t ^('\' ^d+:32+.@a.'aa2(+x'aa+\U2+ma:;23d+}2+:}a2+
+P: the secret to the players, but only when specific conditions are fulfilled will the players be able 
+
+C: \ +32t ^d\3@t\+\U2+d2t32\+.3 D+\U2'3+dU:32d"+IU2+(2:a23+:tt Dma'dU2d+\U'd+};+!'5'^!+2:tU+ma:;23+:+dU
+P: to reconstruct the secret from their shares. The dealer accomplishes this by giving each player a sh
+
+C: :32+'^+d@tU+:+x:;+\U:\+:^;+!3 @m+ .+\+1. 3+\U32dU a(H+ 3+D 32+ma:;23d+t:^+\ !2\U23+32t ^d\3@t\+\U2+d
+P: are in such a way that any group of t (for threshold) or more players can together reconstruct the s
+
+C: 2t32\+}@\+^ +!3 @m+ .+.2x23+\U:^+\+ma:;23d+t:^"+$@tU+:+d;d\2D+'d+t:aa2(+:+1\?+^HC\U32dU a(+dtU2D2+1d
+P: ecret but no group of fewer than t players can. Such a system is called a (t, n)-threshold scheme (s
+
+C:  D2\'D2d+'\+'d+x3'\\2^+:d+:^+1^?+\HC\U32dU a(+dtU2D2H"
+P: ometimes it is written as an (n, t)-threshold scheme).
+
+C: 
+P: 
+
+C: $2t32\+dU:3'^!+x:d+'^52^\2(+'^(2m2^(2^\a;+};+k('+$U:D'3pR9+:^(+]2 3!2+ia:*a2;p`9+'^+R{V{"
+P: Secret sharing was invented independently by Adi Shamir[1] and George Blakley[2] in 1979.
+
+C: F ^\2^\d
+P: Contents
+
+C: 
+P: 
+
+C: ++++R+wDm 3\:^t2
+P:     1 Importance
+
+C: ++++`+l$2t@32l+523d@d+l'^d2t@32l+d2t32\+dU:3'^!
+P:     2 "Secure" versus "insecure" secret sharing
+
+C: ++++N+Z'D'\:\' ^d
+P:     3 Limitations
+
+C: ++++B+I3'5':a+d2t32\+dU:3'^!
+P:     4 Trivial secret sharing
+
+C: ++++++++B"R+\+z+R
+P:         4.1 t = 1
+
+C: ++++++++B"`+\+z+^
+P:         4.2 t = n
+
+C: ++++++++B"N+R+M+\+M+^?+:^(?+D 32+!2^23:aa;?+:^;+(2d'32(+d@}d2\+ .+_R?`?"""?^6
+P:         4.3 1 < t < n, and, more generally, any desired subset of {1,2,...,n}
+
+C: ++++&+v..'t'2^\+d2t32\+dU:3'^!
+P:     5 Efficient secret sharing
+
+C: ++++++++&"R+$U:D'3|d+dtU2D2
+P:         5.1 Shamir's scheme
+
+C: ++++++++&"`+ia:*a2;|d+dtU2D2
+P:         5.2 Blakley's scheme
+
+C: ++++++++&"N+gd'^!+\U2+FU'^2d2+32D:'^(23+\U2 32D
+P:         5.3 Using the Chinese remainder theorem
+
+C: ++++[+W3 :t\'52+d2t32\+dU:3'^!
+P:     6 Proactive secret sharing
+
+C: ++++V+P23'.':}a2+d2t32\+dU:3'^!
+P:     7 Verifiable secret sharing
+
+C: ++++s+F Dm@\:\' ^:aa;+d2t@32+d2t32\+dU:3'^!
+P:     8 Computationally secure secret sharing
+
+C: ++++{+/@a\'Cd2t32\+:^(+dm:t2+2..'t'2^\+1}:\tU2(H+d2t32\+dU:3'^!
+P:     9 Multi-secret and space efficient (batched) secret sharing
+
+C: ++++RE+8\U23+@d2d+:^(+:mma't:\' ^d
+P:     10 Other uses and applications
+
+C: ++++RR+$22+:ad 
+P:     11 See also
+
+C: ++++R`+J2.232^t2d
+P:     12 References
+
+C: ++++RN+v0\23^:a+a'^*d
+P:     13 External links
+
+C: 
+P: 
+
+C: wDm 3\:^t2
+P: Importance
+
+C: 
+P: 
+
+C: $2t32\+dU:3'^!+dtU2D2d+:32+'(2:a+. 3+d\ 3'^!+'^. 3D:\' ^+\U:\+'d+U'!Ua;+d2^d'\'52+:^(+U'!Ua;+'Dm 3\:
+P: Secret sharing schemes are ideal for storing information that is highly sensitive and highly importa
+
+C: ^\"+v0:Dma2d+'^ta@(2e+2^t3;m\' ^+*2;d?+D'dd'a2+a:@^tU+t (2d?+:^(+^@D}232(+}:^*+:tt @^\d"+v:tU+ .+\U2
+P: nt. Examples include: encryption keys, missile launch codes, and numbered bank accounts. Each of the
+
+C: d2+m'2t2d+ .+'^. 3D:\' ^+D@d\+}2+*2m\+U'!Ua;+t ^.'(2^\':a?+:d+\U2'3+20m d@32+t @a(+}2+('d:d\3 @d?+U 
+P: se pieces of information must be kept highly confidential, as their exposure could be disastrous, ho
+
+C: x2523?+'\+'d+:ad +t3'\'t:a+\U:\+\U2;+dU @a(+^ \+}2+a d\"+I3:('\' ^:a+D2\U (d+. 3+2^t3;m\' ^+:32+'aaC
+P: wever, it is also critical that they should not be lost. Traditional methods for encryption are ill-
+
+C: d@'\2(+. 3+d'D@a\:^2 @da;+:tU'25'^!+U'!U+a252ad+ .+t ^.'(2^\':a'\;+:^(+32a':}'a'\;"+IU'd+'d+}2t:@d2+
+P: suited for simultaneously achieving high levels of confidentiality and reliability. This is because 
+
+C: xU2^+d\ 3'^!+\U2+2^t3;m\' ^+*2;?+ ^2+D@d\+tU  d2+}2\x22^+*22m'^!+:+d'^!a2+t m;+ .+\U2+*2;+'^+ ^2+a t
+P: when storing the encryption key, one must choose between keeping a single copy of the key in one loc
+
+C: :\' ^+. 3+D:0'D@D+d2t32t;?+ 3+*22m'^!+D@a\'ma2+t m'2d+ .+\U2+*2;+'^+('..232^\+a t:\' ^d+. 3+!32:\23+
+P: ation for maximum secrecy, or keeping multiple copies of the key in different locations for greater 
+
+C: 32a':}'a'\;"+w^t32:d'^!+32a':}'a'\;+ .+\U2+*2;+};+d\ 3'^!+D@a\'ma2+t m'2d+a x23d+t ^.'(2^\':a'\;+};+
+P: reliability. Increasing reliability of the key by storing multiple copies lowers confidentiality by 
+
+C: t32:\'^!+:(('\' ^:a+:\\:t*+52t\ 3dX+\U232+:32+D 32+ mm 3\@^'\'2d+. 3+:+t m;+\ +.:aa+'^\ +\U2+x3 ^!+U
+P: creating additional attack vectors; there are more opportunities for a copy to fall into the wrong h
+
+C: :^(d"+$2t32\+dU:3'^!+dtU2D2d+:((32dd+\U'd+m3 }a2D?+:^(+:aa x+:3}'\3:3'a;+U'!U+a252ad+ .+t ^.'(2^\':a
+P: ands. Secret sharing schemes address this problem, and allow arbitrarily high levels of confidential
+
+C: '\;+:^(+32a':}'a'\;+\ +}2+:tU'252("
+P: ity and reliability to be achieved.
+
+C: 
+P: 
+
+C: $2t32\+dU:3'^!+dtU2D2d+:32+'Dm 3\:^\+'^+ta @(+t Dm@\'^!+2^5'3 ^D2^\d"+IU@d+:+*2;+t:^+}2+('d\3'}@\2(+
+P: Secret sharing schemes are important in cloud computing environments. Thus a key can be distributed 
+
+C:  523+D:^;+d23523d+};+:+\U32dU a(+d2t32\+dU:3'^!+D2tU:^'dD"+IU2+*2;+'d+\U2^+32t ^d\3@t\2(+xU2^+^22(2(
+P: over many servers by a threshold secret sharing mechanism. The key is then reconstructed when needed
+
+C: "+$2t32\+dU:3'^!+U:d+:ad +}22^+d@!!2d\2(+. 3+d2^d 3+^2\x 3*d+xU232+\U2+a'^*d+:32+a':}a2+\ +}2+\:mm2(
+P: . Secret sharing has also been suggested for sensor networks where the links are liable to be tapped
+
+C: +};+d2^('^!+\U2+(:\:+'^+dU:32d+xU'tU+D:*2d+\U2+\:d*+ .+\U2+2:52d(3 mm23+U:3(23"+IU2+d2t@3'\;+'^+d@tU
+P:  by sending the data in shares which makes the task of the eavesdropper harder. The security in such
+
+C: +2^5'3 ^D2^\d+t:^+}2+D:(2+!32:\23+};+t ^\'^@ @d+tU:^!'^!+ .+\U2+x:;+\U2+dU:32d+:32+t ^d\3@t\2("
+P:  environments can be made greater by continuous changing of the way the shares are constructed.
+
+C: l$2t@32l+523d@d+l'^d2t@32l+d2t32\+dU:3'^!
+P: "Secure" versus "insecure" secret sharing
+
+C: 
+P: 
+
+C: k+d2t@32+d2t32\+dU:3'^!+dtU2D2+('d\3'}@\2d+dU:32d+d +\U:\+:^; ^2+x'\U+.2x23+\U:^+\+dU:32d+U:d+^ +D 3
+P: A secure secret sharing scheme distributes shares so that anyone with fewer than t shares has no mor
+
+C: 2+'^. 3D:\' ^+:} @\+\U2+d2t32\+\U:^+d D2 ^2+x'\U+E+dU:32d"
+P: e information about the secret than someone with 0 shares.
+
+C: 
+P: 
+
+C: F ^d'(23+. 3+20:Dma2+\U2+d2t32\+dU:3'^!+dtU2D2+'^+xU'tU+\U2+d2t32\+mU3:d2+lm:ddx 3(l+'d+('5'(2(+'^\ 
+P: Consider for example the secret sharing scheme in which the secret phrase "password" is divided into
+
+C: +\U2+dU:32d+lm:l?+lddl?+lx l?+:^(+l3(l"+k+m23d ^+x'\U+E+dU:32d+*^ xd+ ^a;+\U:\+\U2+m:ddx 3(+t ^d'd\d
+P:  the shares "pa", "ss", "wo", and "rd". A person with 0 shares knows only that the password consists
+
+C: + .+2'!U\+a2\\23d?+:^(+\U@d+x @a(+U:52+\ +!@2dd+\U2+m:ddx 3(+.3 D+`[s+z+`Es+}'aa' ^+m dd'}a2+t D}'^:
+P:  of eight letters, and thus would have to guess the password from 268 = 208 billion possible combina
+
+C: \' ^d"+k+m23d ^+x'\U+ ^2+dU:32?+U x2523?+x @a(+U:52+\ +!@2dd+ ^a;+\U2+d'0+a2\\23d?+.3 D+`[[+z+NEs+D'
+P: tions. A person with one share, however, would have to guess only the six letters, from 266 = 308 mi
+
+C: aa' ^+t D}'^:\' ^d?+:^(+d + ^+:d+D 32+m23d ^d+t aa@(2"+F ^d2>@2^\a;?+\U'd+d;d\2D+'d+^ \+:+ld2t@32l+d
+P: llion combinations, and so on as more persons collude. Consequently, this system is not a "secure" s
+
+C: 2t32\+dU:3'^!+dtU2D2?+}2t:@d2+:+ma:;23+x'\U+.2x23+\U:^+\+d2t32\+dU:32d+'d+:}a2+\ +32(@t2+\U2+m3 }a2D
+P: ecret sharing scheme, because a player with fewer than t secret shares is able to reduce the problem
+
+C: + .+ }\:'^'^!+\U2+'^^23+d2t32\+x'\U @\+.'3d\+^22('^!+\ + }\:'^+:aa+ .+\U2+^2t2dd:3;+dU:32d"
+P:  of obtaining the inner secret without first needing to obtain all of the necessary shares.
+
+C: 
+P: 
+
+C: w^+t ^\3:d\?+t ^d'(23+\U2+d2t32\+dU:3'^!+dtU2D2+xU232+4+'d+\U2+d2t32\+\ +}2+dU:32(?+W'+:32+m@}a't+:d
+P: In contrast, consider the secret sharing scheme where X is the secret to be shared, Pi are public as
+
+C: ;DD2\3't+2^t3;m\' ^+*2;d+:^(+A'+\U2'3+t 332dm ^('^!+m3'5:\2+*2;d"+v:tU+ma:;23+-+'d+m3 5'(2(+x'\U+_WR
+P: ymmetric encryption keys and Qi their corresponding private keys. Each player J is provided with {P1
+
+C: 1W`1"""1WY14HHHH?+AT6"+w^+\U'd+dtU2D2?+:^;+ma:;23+x'\U+m3'5:\2+*2;+R+t:^+32D 52+\U2+ @\23+a:;23+ .+2
+P: (P2(...(PN(X)))), Qj}. In this scheme, any player with private key 1 can remove the outer layer of e
+
+C: ^t3;m\' ^?+:+ma:;23+x'\U+*2;d+R+:^(+`+t:^+32D 52+\U2+.'3d\+:^(+d2t ^(+a:;23?+:^(+d + ^"+k+ma:;23+x'\
+P: ncryption, a player with keys 1 and 2 can remove the first and second layer, and so on. A player wit
+
+C: U+.2x23+\U:^+Y+*2;d+t:^+^2523+.@aa;+32:tU+\U2+d2t32\+4+x'\U @\+.'3d\+^22('^!+\ +(2t3;m\+:+m@}a'tC*2;
+P: h fewer than N keys can never fully reach the secret X without first needing to decrypt a public-key
+
+C: C2^t3;m\2(+}a }+. 3+xU'tU+U2+( 2d+^ \+U:52+\U2+t 332dm ^('^!+m3'5:\2+*2;++:+m3 }a2D+\U:\+'d+t@332^\a
+P: -encrypted blob for which he does not have the corresponding private key  a problem that is currentl
+
+C: ;+}2a'252(+\ +}2+t Dm@\:\' ^:aa;+'^.2:d'}a2"+k(('\' ^:aa;+x2+t:^+d22+\U:\+:^;+@d23+x'\U+:aa+Y+m3'5:\
+P: y believed to be computationally infeasible. Additionally we can see that any user with all N privat
+
+C: 2+*2;d+'d+:}a2+\ +(2t3;m\+:aa+ .+\U2+ @\23+a:;23d+\ + }\:'^+4?+\U2+d2t32\?+:^(+t ^d2>@2^\a;+\U'd+d;d
+P: e keys is able to decrypt all of the outer layers to obtain X, the secret, and consequently this sys
+
+C: \2D+'d+:+d2t@32+d2t32\+('d\3'}@\' ^+d;d\2D"
+P: tem is a secure secret distribution system.
+
+C: Z'D'\:\' ^d
+P: Limitations
+
+C: 
+P: 
+
+C: $2523:a+d2t32\CdU:3'^!+dtU2D2d+:32+d:'(+\ +}2+'^. 3D:\' ^C\U2 32\'t:aa;+d2t@32+:^(+t:^+}2+m3 52^+\ +
+P: Several secret-sharing schemes are said to be information-theoretically secure and can be proven to 
+
+C: }2+d ?+xU'a2+ \U23d+!'52+@m+\U'd+@^t ^('\' ^:a+d2t@3'\;+. 3+'Dm3 52(+2..'t'2^t;+xU'a2+D:'^\:'^'^!+2^
+P: be so, while others give up this unconditional security for improved efficiency while maintaining en
+
+C:  @!U+d2t@3'\;+\ +}2+t ^d'(232(+:d+d2t@32+:d+ \U23+t DD ^+t3;m\ !3:mU't+m3'D'\'52d"+y 3+20:Dma2?+\U2;
+P: ough security to be considered as secure as other common cryptographic primitives. For example, they
+
+C: +D'!U\+:aa x+d2t32\d+\ +}2+m3 \2t\2(+};+dU:32d+x'\U+R`sC}'\d+ .+2^\3 m;+2:tU?+d'^t2+2:tU+dU:32+x @a(
+P:  might allow secrets to be protected by shares with 128-bits of entropy each, since each share would
+
+C: +}2+t ^d'(232(+2^ @!U+\ +d\;D'2+:^;+t ^t2'5:}a2+m32d2^\C(:;+:(523d:3;?+32>@'3'^!+:+}3@\2+. 3t2+:\\:t
+P:  be considered enough to stymie any conceivable present-day adversary, requiring a brute force attac
+
+C: *+ .+:523:!2+d'b2+`R`V"
+P: k of average size 2127.
+
+C: 
+P: 
+
+C: F DD ^+\ +:aa+@^t ^('\' ^:aa;+d2t@32+d2t32\+dU:3'^!+dtU2D2d?+\U232+:32+a'D'\:\' ^de
+P: Common to all unconditionally secure secret sharing schemes, there are limitations:
+
+C: 
+P: 
+
+C: ++++v:tU+dU:32+ .+\U2+d2t32\+D@d\+}2+:\+a2:d\+:d+a:3!2+:d+\U2+d2t32\+'\d2a."+IU'd+32d@a\+'d+}:d2(+'^
+P:     Each share of the secret must be at least as large as the secret itself. This result is based in
+
+C: +'^. 3D:\' ^+\U2 3;?+}@\+t:^+}2+@^(23d\  (+'^\@'\'52a;"+]'52^+\++R+dU:32d?+^ +'^. 3D:\' ^+xU:\d 2523
+P:  information theory, but can be understood intuitively. Given t  1 shares, no information whatsoever
+
+C: +t:^+}2+(2\23D'^2(+:} @\+\U2+d2t32\"+IU@d?+\U2+.'^:a+dU:32+D@d\+t ^\:'^+:d+D@tU+'^. 3D:\' ^+:d+\U2+d
+P:  can be determined about the secret. Thus, the final share must contain as much information as the s
+
+C: 2t32\+'\d2a."+IU232+'d+d D2\'D2d+:+x 3*:3 @^(+. 3+\U'd+a'D'\:\' ^+};+.'3d\+t Dm32dd'^!+\U2+d2t32\+}2
+P: ecret itself. There is sometimes a workaround for this limitation by first compressing the secret be
+
+C: . 32+dU:3'^!+'\?+}@\+\U'd+'d+ .\2^+^ \+m dd'}a2+}2t:@d2+D:^;+d2t32\d+1*2;d+. 3+20:Dma2H+a  *+a'*2+U'
+P: fore sharing it, but this is often not possible because many secrets (keys for example) look like hi
+
+C: !UC>@:a'\;+3:^( D+(:\:+:^(+\U@d+:32+U:3(+\ +t Dm32dd"
+P: gh-quality random data and thus are hard to compress.
+
+C: ++++kaa+d2t32\+dU:3'^!+dtU2D2d+@d2+3:^( D+}'\d"+I +('d\3'}@\2+:+ ^2C}'\+d2t32\+:D ^!+\U32dU a(+\+m2 
+P:     All secret sharing schemes use random bits. To distribute a one-bit secret among threshold t peo
+
+C: ma2?+\++R+3:^( D+}'\d+:32+^2t2dd:3;"+I +('d\3'}@\2+:+d2t32\+ .+:3}'\3:3;+a2^!\U+}+}'\d?+2^\3 m;+ .+1
+P: ple, t  1 random bits are necessary. To distribute a secret of arbitrary length b bits, entropy of (
+
+C: \++RH++}+}'\d+'d+^2t2dd:3;"
+P: t  1)  b bits is necessary.
+
+C: 
+P: 
+
+C: I3'5':a+d2t32\+dU:3'^!
+P: Trivial secret sharing
+
+C: \+z+R
+P: t = 1
+
+C: 
+P: 
+
+C: \+z+R+d2t32\+dU:3'^!+'d+\3'5':a"+IU2+d2t32\+t:^+d'Dma;+}2+('d\3'}@\2(+\ +:aa+^+m:3\'t'm:^\d"
+P: t = 1 secret sharing is trivial. The secret can simply be distributed to all n participants.
+
+C: \+z+^
+P: t = n
+
+C: 
+P: 
+
+C: IU232+:32+d2523:a+1\?+^H+d2t32\CdU:3'^!+dtU2D2d+. 3+\+z+^?+xU2^+:aa+dU:32d+:32+^2t2dd:3;+\ +32t 523+
+P: There are several (t, n) secret-sharing schemes for t = n, when all shares are necessary to recover 
+
+C: \U2+d2t32\e
+P: the secret:
+
+C: 
+P: 
+
+C: ++++v^t (2+\U2+d2t32\+:d+:^+:3}'\3:3;+a2^!\U+}'^:3;+^@D}23+d"+]'52+\ +2:tU+ma:;23+'+120t2m\+ ^2H+:+3
+P:     Encode the secret as an arbitrary length binary number s. Give to each player i (except one) a r
+
+C: :^( D+^@D}23+m'+x'\U+\U2+d:D2+a2^!\U+:d+d"+]'52+\ +\U2+a:d\+ma:;23+\U2+32d@a\+ .+1d+48J+mR+48J+m`+48
+P: andom number pi with the same length as s. Give to the last player the result of (s XOR p1 XOR p2 XO
+
+C: J+"""+48J+m^RH+xU232+48J+'d+}'\x'd2+20ta@d'52+ 3"+IU2+d2t32\+'d+\U2+}'\x'd2+48J+ .+:aa+\U2+ma:;23d|+
+P: R ... XOR pn1) where XOR is bitwise exclusive or. The secret is the bitwise XOR of all the players' 
+
+C: ^@D}23d+1mH"
+P: numbers (p).
+
+C: ++++k(('\' ^:aa;?+1RH+t:^+}2+m23. 3D2(+@d'^!+:^;+a'^2:3+ m23:\ 3+'^+:^;+.'2a("+y 3+20:Dma2?+U232|d+:
+P:     Additionally, (1) can be performed using any linear operator in any field. For example, here's a
+
+C: ^+:a\23^:\'52+\U:\+'d+.@^t\' ^:aa;+2>@'5:a2^\+\ +1RH"+Z2\|d+d2a2t\+N`C}'\+'^\2!23d+x'\U+x2aaC(2.'^2(
+P: n alternative that is functionally equivalent to (1). Let's select 32-bit integers with well-defined
+
+C: + 523.a x+d2D:^\'td+1'"2"+\U2+t 332t\+:^dx23+'d+m32d2352(?+D (@a +`N`H"+y'3d\?+d+t:^+}2+('5'(2(+'^\ 
+P:  overflow semantics (i.e. the correct answer is preserved, modulo 232). First, s can be divided into
+
+C: +:+52t\ 3+ .+/+N`C}'\+'^\2!23d+t:aa2(+5d2t32\"+IU2^+1^++RH+ma:;23d+:32+2:tU+!'52^+:+52t\ 3+ .+/+3:^(
+P:  a vector of M 32-bit integers called vsecret. Then (n  1) players are each given a vector of M rand
+
+C:  D+'^\2!23d?+ma:;23+'+32t2'5'^!+5'"+IU2+32D:'^'^!+ma:;23+'d+!'52^+5^+z+15d2t32\++5R++5`++"""++5^RH"+
+P: om integers, player i receiving vi. The remaining player is given vn = (vsecret  v1  v2  ...  vn1). 
+
+C: IU2+d2t32\+52t\ 3+t:^+\U2^+}2+32t 5232(+};+d@DD'^!+:t3 dd+:aa+\U2+ma:;23|d+52t\ 3d"
+P: The secret vector can then be recovered by summing across all the player's vectors.
+
+C: 
+P: 
+
+C: R+M+\+M+^?+:^(?+D 32+!2^23:aa;?+:^;+(2d'32(+d@}d2\+ .+_R?`?"""?^6
+P: 1 < t < n, and, more generally, any desired subset of {1,2,...,n}
+
+C: 
+P: 
+
+C: IU2+('..'t@a\;+a'2d+'^+t32:\'^!+dtU2D2d+\U:\+:32+d\'aa+d2t@32?+}@\+( +^ \+32>@'32+:aa+^+dU:32d"+y 3+
+P: The difficulty lies in creating schemes that are still secure, but do not require all n shares. For 
+
+C: 20:Dma2?+'D:!'^2+\U:\+\U2+i :3(+ .+S'32t\ 3d+ .+:+t Dm:^;+x @a(+a'*2+\ +m3 \2t\+\U2'3+d2t32\+. 3D@a:
+P: example, imagine that the Board of Directors of a company would like to protect their secret formula
+
+C: "+IU2+m32d'(2^\+ .+\U2+t Dm:^;+dU @a(+}2+:}a2+\ +:tt2dd+\U2+. 3D@a:+xU2^+^22(2(?+}@\+'^+:^+2D23!2^t;
+P: . The president of the company should be able to access the formula when needed, but in an emergency
+
+C: +:^;+N+ .+\U2+R`+} :3(+D2D}23d+x @a(+}2+:}a2+\ +@^a t*+\U2+d2t32\+. 3D@a:+\ !2\U23"+IU'd+t:^+}2+:tt 
+P:  any 3 of the 12 board members would be able to unlock the secret formula together. This can be acco
+
+C: Dma'dU2(+};+:+d2t32\+dU:3'^!+dtU2D2+x'\U+\+z+N+:^(+^+z+R&?+xU232+N+dU:32d+:32+!'52^+\ +\U2+m32d'(2^\
+P: mplished by a secret sharing scheme with t = 3 and n = 15, where 3 shares are given to the president
+
+C: ?+:^(+R+'d+!'52^+\ +2:tU+} :3(+D2D}23"
+P: , and 1 is given to each board member.
+
+C: 
+P: 
+
+C: GU2^+dm:t2+2..'t'2^t;+'d+^ \+:+t ^t23^?+\3'5':a+\+z+^+dtU2D2d+t:^+}2+@d2(+\ +3252:a+:+d2t32\+\ +:^;+
+P: When space efficiency is not a concern, trivial t = n schemes can be used to reveal a secret to any 
+
+C: (2d'32(+d@}d2\d+ .+\U2+ma:;23d+d'Dma;+};+:mma;'^!+\U2+dtU2D2+. 3+2:tU+d@}d2\"+y 3+20:Dma2?+\ +3252:a
+P: desired subsets of the players simply by applying the scheme for each subset. For example, to reveal
+
+C: +:+d2t32\+d+\ +:^;+\x + .+\U2+\U322+ma:;23d+ka't2?+i }+:^(+F:3 a?+t32:\2+\U322+1+1+N+`+H+_L('dma:;d\
+P:  a secret s to any two of the three players Alice, Bob and Carol, create three ( ( 3 2 ) {\displayst
+
+C: ;a2+_L}'^ D+_N6_`666+_L('dma:;d\;a2+_L}'^ D+_N6_`666H+('..232^\+\+z+^+z+`+_L('dma:;d\;a2+\z^z`6+_L('
+P: yle {\binom {3}{2}}} {\displaystyle {\binom {3}{2}}}) different t = n = 2 {\displaystyle t=n=2} {\di
+
+C: dma:;d\;a2+\z^z`6+d2t32\+dU:32d+. 3+d?+!'5'^!+\U2+\U322+d2\d+ .+\x +dU:32d+\ +ka't2+:^(+i }?+ka't2+:
+P: splaystyle t=n=2} secret shares for s, giving the three sets of two shares to Alice and Bob, Alice a
+
+C: ^(+F:3 a?+:^(+i }+:^(+F:3 a"
+P: nd Carol, and Bob and Carol.
+
+C: v..'t'2^\+d2t32\+dU:3'^!
+P: Efficient secret sharing
+
+C: 
+P: 
+
+C: IU2+\3'5':a+:mm3 :tU+>@'t*a;+}2t D2d+'Dm3:t\'t:a+:d+\U2+^@D}23+ .+d@}d2\d+'^t32:d2d?+. 3+20:Dma2+xU2
+P: The trivial approach quickly becomes impractical as the number of subsets increases, for example whe
+
+C: ^+3252:a'^!+:+d2t32\+\ +:^;+&E+ .+REE+ma:;23d?+xU'tU+x @a(+32>@'32+1+REE+&E+H++R"EE{++RE+`{+_L('dma:
+P: n revealing a secret to any 50 of 100 players, which would require ( 100 50 )  1.009  10 29 {\displa
+
+C: ;d\;a2+_L}'^ D+_REE6_&E66L:mm3 0+R"EE{L\'D2d+REK_`{66+_L('dma:;d\;a2+_L}'^ D+_REE6_&E66L:mm3 0+R"EE{
+P: ystyle {\binom {100}{50}}\approx 1.009\times 10^{29}} {\displaystyle {\binom {100}{50}}\approx 1.009
+
+C: L\'D2d+REK_`{66+dtU2D2d+\ +}2+t32:\2(+:^(+2:tU+ma:;23+\ +D:'^\:'^+1+{{+B{+H++&"EB++RE+`s+_L('dma:;d\
+P: \times 10^{29}} schemes to be created and each player to maintain ( 99 49 )  5.04  10 28 {\displayst
+
+C: ;a2+_L}'^ D+_{{6_B{66L:mm3 0+&"EBL\'D2d+REK_`s66+_L('dma:;d\;a2+_L}'^ D+_{{6_B{66L:mm3 0+&"EBL\'D2d+
+P: yle {\binom {99}{49}}\approx 5.04\times 10^{28}} {\displaystyle {\binom {99}{49}}\approx 5.04\times 
+
+C: REK_`s66+('d\'^t\+d2\d+ .+dU:32d+. 3+2:tU+dtU2D2"+w^+\U2+x 3d\+t:d2?+\U2+'^t32:d2+'d+20m ^2^\':a"+IU
+P: 10^{28}} distinct sets of shares for each scheme. In the worst case, the increase is exponential. Th
+
+C: 'd+U:d+a2(+\ +\U2+d2:3tU+. 3+dtU2D2d+\U:\+:aa x+d2t32\d+\ +}2+dU:32(+2..'t'2^\a;+x'\U+:+\U32dU a(+ .
+P: is has led to the search for schemes that allow secrets to be shared efficiently with a threshold of
+
+C: +ma:;23d"
+P:  players.
+
+C: $U:D'3|d+dtU2D2
+P: Shamir's scheme
+
+C: /:'^+:3\'ta2e+$U:D'3|d+$2t32\+$U:3'^!
+P: Main article: Shamir's Secret Sharing
+
+C: 
+P: 
+
+C: w^+\U'd+dtU2D2?+:^;+\+ @\+ .+^+dU:32d+D:;+}2+@d2(+\ +32t 523+\U2+d2t32\"+IU2+d;d\2D+32a'2d+ ^+\U2+'(
+P: In this scheme, any t out of n shares may be used to recover the secret. The system relies on the id
+
+C: 2:+\U:\+; @+t:^+.'\+:+@^'>@2+m a;^ D':a+ .+(2!322+\++R+\ +:^;+d2\+ .+\+m '^\d+\U:\+a'2+ ^+\U2+m a;^ 
+P: ea that you can fit a unique polynomial of degree t  1 to any set of t points that lie on the polyno
+
+C: D':a"+w\+\:*2d+\x +m '^\d+\ +(2.'^2+:+d\3:'!U\+a'^2?+\U322+m '^\d+\ +.@aa;+(2.'^2+:+>@:(3:\'t?+. @3+
+P: mial. It takes two points to define a straight line, three points to fully define a quadratic, four 
+
+C: m '^\d+\ +(2.'^2+:+t@}'t+t@352?+:^(+d + ^"+IU:\+'d?+'\+\:*2d+\+m '^\d+\ +(2.'^2+:+m a;^ D':a+ .+(2!3
+P: points to define a cubic curve, and so on. That is, it takes t points to define a polynomial of degr
+
+C: 22+\++R"+IU2+D2\U (+'d+\ +t32:\2+:+m a;^ D':a+ .+(2!322+\++R+x'\U+\U2+d2t32\+:d+\U2+.'3d\+t 2..'t'2^
+P: ee t  1. The method is to create a polynomial of degree t  1 with the secret as the first coefficien
+
+C: \+:^(+\U2+32D:'^'^!+t 2..'t'2^\d+m't*2(+:\+3:^( D"+Y20\+.'^(+^+m '^\d+ ^+\U2+t@352+:^(+!'52+ ^2+\ +2
+P: t and the remaining coefficients picked at random. Next find n points on the curve and give one to e
+
+C: :tU+ .+\U2+ma:;23d"+GU2^+:\+a2:d\+\+ @\+ .+\U2+^+ma:;23d+3252:a+\U2'3+m '^\d?+\U232+'d+d@..'t'2^\+'^
+P: ach of the players. When at least t out of the n players reveal their points, there is sufficient in
+
+C: . 3D:\' ^+\ +.'\+:+1\++RH\U+(2!322+m a;^ D':a+\ +\U2D?+\U2+.'3d\+t 2..'t'2^\+}2'^!+\U2+d2t32\"
+P: formation to fit a (t  1)th degree polynomial to them, the first coefficient being the secret.
+
+C: ia:*a2;|d+dtU2D2
+P: Blakley's scheme
+
+C: /:'^+:3\'ta2e+ia:*a2;|d+$2t32\+$U:3'^!
+P: Main article: Blakley's Secret Sharing
+
+C: 
+P: 
+
+C: Ix +^ ^m:3:aa2a+a'^2d+'^+\U2+d:D2+ma:^2+'^\23d2t\+:\+20:t\a;+ ^2+m '^\"+IU322+^ ^m:3:aa2a+ma:^2d+'^+
+P: Two nonparallel lines in the same plane intersect at exactly one point. Three nonparallel planes in 
+
+C: dm:t2+'^\23d2t\+:\+20:t\a;+ ^2+m '^\"+/ 32+!2^23:aa;?+:^;+^+^ ^m:3:aa2a+1^++RHC('D2^d' ^:a+U;m23ma:^
+P: space intersect at exactly one point. More generally, any n nonparallel (n  1)-dimensional hyperplan
+
+C: 2d+'^\23d2t\+:\+:+dm2t'.'t+m '^\"+IU2+d2t32\+D:;+}2+2^t (2(+:d+:^;+d'^!a2+t  3('^:\2+ .+\U2+m '^\+ .
+P: es intersect at a specific point. The secret may be encoded as any single coordinate of the point of
+
+C: +'^\23d2t\' ^"+w.+\U2+d2t32\+'d+2^t (2(+@d'^!+:aa+\U2+t  3('^:\2d?+252^+'.+\U2;+:32+3:^( D?+\U2^+:^+
+P:  intersection. If the secret is encoded using all the coordinates, even if they are random, then an 
+
+C: '^d'(23+1d D2 ^2+'^+m dd2dd' ^+ .+ ^2+ 3+D 32+ .+\U2+1^++RHC('D2^d' ^:a+U;m23ma:^2dH+!:'^d+'^. 3D:\'
+P: insider (someone in possession of one or more of the (n  1)-dimensional hyperplanes) gains informati
+
+C:  ^+:} @\+\U2+d2t32\+d'^t2+U2+*^ xd+'\+D@d\+a'2+ ^+U'd+ma:^2"+w.+:^+'^d'(23+t:^+!:'^+:^;+D 32+*^ xa2(
+P: on about the secret since he knows it must lie on his plane. If an insider can gain any more knowled
+
+C: !2+:} @\+\U2+d2t32\+\U:^+:^+ @\d'(23+t:^?+\U2^+\U2+d;d\2D+^ +a ^!23+U:d+'^. 3D:\' ^+\U2 32\'t+d2t@3'
+P: ge about the secret than an outsider can, then the system no longer has information theoretic securi
+
+C: \;"+w.+ ^a;+ ^2+ .+\U2+^+t  3('^:\2d+'d+@d2(?+\U2^+\U2+'^d'(23+*^ xd+^ +D 32+\U:^+:^+ @\d'(23+1'"2"?
+P: ty. If only one of the n coordinates is used, then the insider knows no more than an outsider (i.e.,
+
+C: +\U:\+\U2+d2t32\+D@d\+a'2+ ^+\U2+0C:0'd+. 3+:+`C('D2^d' ^:a+d;d\2DH"+v:tU+ma:;23+'d+!'52^+2^ @!U+'^.
+P:  that the secret must lie on the x-axis for a 2-dimensional system). Each player is given enough inf
+
+C:  3D:\' ^+\ +(2.'^2+:+U;m23ma:^2X+\U2+d2t32\+'d+32t 5232(+};+t:at@a:\'^!+\U2+ma:^2d|+m '^\+ .+'^\23d2
+P: ormation to define a hyperplane; the secret is recovered by calculating the planes' point of interse
+
+C: t\' ^+:^(+\U2^+\:*'^!+:+dm2t'.'2(+t  3('^:\2+ .+\U:\+'^\23d2t\' ^"
+P: ction and then taking a specified coordinate of that intersection.
+
+C: 8^2+dU:32+Ix +dU:32d+'^\23d2t\'^!+ ^+:+a'^2+IU322+dU:32d+'^\23d2t\'^!+:\+:+m '^\
+P: One share Two shares intersecting on a line Three shares intersecting at a point
+
+C: ia:*a2;|d+dtU2D2+'^+\U322+('D2^d' ^de+2:tU+dU:32+'d+:+ma:^2?+:^(+\U2+d2t32\+'d+\U2+m '^\+:\+xU'tU+\U
+P: Blakley's scheme in three dimensions: each share is a plane, and the secret is the point at which th
+
+C: 322+dU:32d+'^\23d2t\"+Ix +dU:32d+:32+'^d@..'t'2^\+\ +(2\23D'^2+\U2+d2t32\?+:a\U @!U+\U2;+( +m3 5'(2+
+P: ree shares intersect. Two shares are insufficient to determine the secret, although they do provide 
+
+C: 2^ @!U+'^. 3D:\' ^+\ +^:33 x+'\+( x^+\ +\U2+a'^2+xU232+} \U+ma:^2d+'^\23d2t\"
+P: enough information to narrow it down to the line where both planes intersect.
+
+C: 
+P: 
+
+C: ia:*a2;|d+dtU2D2+'d+a2dd+dm:t2C2..'t'2^\+\U:^+$U:D'3|dX+xU'a2+$U:D'3|d+dU:32d+:32+2:tU+ ^a;+:d+a:3!2
+P: Blakley's scheme is less space-efficient than Shamir's; while Shamir's shares are each only as large
+
+C: +:d+\U2+ 3'!'^:a+d2t32\?+ia:*a2;|d+dU:32d+:32+\+\'D2d+a:3!23?+xU232+\+'d+\U2+\U32dU a(+^@D}23+ .+ma:
+P:  as the original secret, Blakley's shares are t times larger, where t is the threshold number of pla
+
+C: ;23d"+ia:*a2;|d+dtU2D2+t:^+}2+\'!U\2^2(+};+:(('^!+32d\3't\' ^d+ ^+xU'tU+ma:^2d+:32+@d:}a2+:d+dU:32d"
+P: yers. Blakley's scheme can be tightened by adding restrictions on which planes are usable as shares.
+
+C: +IU2+32d@a\'^!+dtU2D2+'d+2>@'5:a2^\+\ +$U:D'3|d+m a;^ D':a+d;d\2D"
+P:  The resulting scheme is equivalent to Shamir's polynomial system.
+
+C: gd'^!+\U2+FU'^2d2+32D:'^(23+\U2 32D
+P: Using the Chinese remainder theorem
+
+C: /:'^+:3\'ta2e+$2t32\+dU:3'^!+@d'^!+\U2+FU'^2d2+32D:'^(23+\U2 32D
+P: Main article: Secret sharing using the Chinese remainder theorem
+
+C: 
+P: 
+
+C: IU2+FU'^2d2+32D:'^(23+\U2 32D+t:^+:ad +}2+@d2(+'^+d2t32\+dU:3'^!?+. 3+'\+m3 5'(2d+@d+x'\U+:+D2\U (+\
+P: The Chinese remainder theorem can also be used in secret sharing, for it provides us with a method t
+
+C:  +@^'>@2a;+(2\23D'^2+:+^@D}23+$+D (@a +*+D:^;+m:'3x'd2+t m3'D2+'^\2!23d+D+R+?+D+`+?+"+"+"+?+D+*+_L('
+P: o uniquely determine a number S modulo k many pairwise coprime integers m 1 , m 2 , . . . , m k {\di
+
+C: dma:;d\;a2+Dn_R6?Dn_`6?"""?Dn_*66+DnR?+Dn`?+"""?+Dn*?+!'52^+\U:\+$+M++'+z+R+*+D+'+_L('dma:;d\;a2+$ML
+P: splaystyle m_{1},m_{2},...,m_{k}} m_1, m_2, ..., m_k, given that S <  i = 1 k m i {\displaystyle S<\
+
+C: m3 (+n_'zR6K_*6Dn_'66+$+M+Lm3 (n_'zR6K*+Dn'"+IU232+:32+\x +d2t32\+dU:3'^!+dtU2D2d+\U:\+D:*2+@d2+ .+\
+P: prod _{i=1}^{k}m_{i}} S < \prod_{i=1}^k m_i. There are two secret sharing schemes that make use of t
+
+C: U2+FU'^2d2+J2D:'^(23+IU2 32D?+/'!^ \\2|d+:^(+kdD@\UCia  D|d+$tU2D2d"+IU2;+:32+\U32dU a(+d2t32\+dU:3'
+P: he Chinese Remainder Theorem, Mignotte's and Asmuth-Bloom's Schemes. They are threshold secret shari
+
+C: ^!+dtU2D2d?+'^+xU'tU+\U2+dU:32d+:32+!2^23:\2(+};+32(@t\' ^+D (@a +\U2+'^\2!23d+D+'+_L('dma:;d\;a2+Dn
+P: ng schemes, in which the shares are generated by reduction modulo the integers m i {\displaystyle m_
+
+C: _'66+Dn_'6?+:^(+\U2+d2t32\+'d+32t 5232(+};+2dd2^\':aa;+d a5'^!+\U2+d;d\2D+ .+t ^!3@2^t2d+@d'^!+\U2+F
+P: {i}} m_{i}, and the secret is recovered by essentially solving the system of congruences using the C
+
+C: U'^2d2+J2D:'^(23+IU2 32D"
+P: hinese Remainder Theorem.
+
+C: W3 :t\'52+d2t32\+dU:3'^!
+P: Proactive secret sharing
+
+C: /:'^+:3\'ta2e+W3 :t\'52+d2t32\+dU:3'^!
+P: Main article: Proactive secret sharing
+
+C: 
+P: 
+
+C: w.+\U2+ma:;23d+d\ 32+\U2'3+dU:32d+ ^+'^d2t@32+t Dm@\23+d23523d?+:^+:\\:t*23+t @a(+t3:t*+'^+:^(+d\2:a
+P: If the players store their shares on insecure computer servers, an attacker could crack in and steal
+
+C: +\U2+dU:32d"+w.+'\+'d+^ \+m3:t\'t:a+\ +tU:^!2+\U2+d2t32\?+\U2+@^t Dm3 D'd2(+1$U:D'3Cd\;a2H+dU:32d+t:
+P:  the shares. If it is not practical to change the secret, the uncompromised (Shamir-style) shares ca
+
+C: ^+}2+32^2x2("+IU2+(2:a23+!2^23:\2d+:+^2x+3:^( D+m a;^ D':a+x'\U+t ^d\:^\+\23D+b23 +:^(+t:at@a:\2d+. 
+P: n be renewed. The dealer generates a new random polynomial with constant term zero and calculates fo
+
+C: 3+2:tU+32D:'^'^!+ma:;23+:+^2x+ 3(232(+m:'3?+xU232+\U2+0Ct  3('^:\2d+ .+\U2+ a(+:^(+^2x+m:'3d+:32+\U2
+P: r each remaining player a new ordered pair, where the x-coordinates of the old and new pairs are the
+
+C: +d:D2"+v:tU+ma:;23+\U2^+:((d+\U2+ a(+:^(+^2x+;Ct  3('^:\2d+\ +2:tU+ \U23+:^(+*22md+\U2+32d@a\+:d+\U2
+P:  same. Each player then adds the old and new y-coordinates to each other and keeps the result as the
+
+C: +^2x+;Ct  3('^:\2+ .+\U2+d2t32\"
+P:  new y-coordinate of the secret.
+
+C: 
+P: 
+
+C: kaa+ .+\U2+^ ^C@m(:\2(+dU:32d+\U2+:\\:t*23+:tt@D@a:\2(+}2t D2+@d2a2dd"+k^+:\\:t*23+t:^+ ^a;+32t 523+
+P: All of the non-updated shares the attacker accumulated become useless. An attacker can only recover 
+
+C: \U2+d2t32\+'.+U2+t:^+.'^(+2^ @!U+ \U23+^ ^C@m(:\2(+dU:32d+\ +32:tU+\U2+\U32dU a("+IU'd+d'\@:\' ^+dU 
+P: the secret if he can find enough other non-updated shares to reach the threshold. This situation sho
+
+C: @a(+^ \+U:mm2^+}2t:@d2+\U2+ma:;23d+(2a2\2(+\U2'3+ a(+dU:32d"+k(('\' ^:aa;?+:^+:\\:t*23+t:^^ \+32t 52
+P: uld not happen because the players deleted their old shares. Additionally, an attacker cannot recove
+
+C: 3+:^;+'^. 3D:\' ^+:} @\+\U2+ 3'!'^:a+d2t32\+.3 D+\U2+@m(:\2+.'a2d+}2t:@d2+\U2;+t ^\:'^+ ^a;+3:^( D+'
+P: r any information about the original secret from the update files because they contain only random i
+
+C: ^. 3D:\' ^"
+P: nformation.
+
+C: 
+P: 
+
+C: IU2+(2:a23+t:^+tU:^!2+\U2+\U32dU a(+^@D}23+xU'a2+('d\3'}@\'^!+@m(:\2d?+}@\+D@d\+:ax:;d+32D:'^+5'!'a:
+P: The dealer can change the threshold number while distributing updates, but must always remain vigila
+
+C: ^\+ .+ma:;23d+*22m'^!+20m'32(+dU:32d"
+P: nt of players keeping expired shares.
+
+C: P23'.':}a2+d2t32\+dU:3'^!
+P: Verifiable secret sharing
+
+C: /:'^+:3\'ta2e+P23'.':}a2+d2t32\+dU:3'^!
+P: Main article: Verifiable secret sharing
+
+C: 
+P: 
+
+C: k+ma:;23+D'!U\+a'2+:} @\+U'd+ x^+dU:32+\ +!:'^+:tt2dd+\ + \U23+dU:32d"+k+523'.':}a2+d2t32\+dU:3'^!+1
+P: A player might lie about his own share to gain access to other shares. A verifiable secret sharing (
+
+C: P$$H+dtU2D2+:aa xd+ma:;23d+\ +}2+t23\:'^+\U:\+^ + \U23+ma:;23d+:32+a;'^!+:} @\+\U2+t ^\2^\d+ .+\U2'3
+P: VSS) scheme allows players to be certain that no other players are lying about the contents of their
+
+C: +dU:32d?+@m+\ +:+32:d ^:}a2+m3 }:}'a'\;+ .+233 3"+$@tU+dtU2D2d+t:^^ \+}2+t Dm@\2(+t ^52^\' ^:aa;X+\U
+P:  shares, up to a reasonable probability of error. Such schemes cannot be computed conventionally; th
+
+C: 2+ma:;23d+D@d\+t aa2t\'52a;+:((+:^(+D@a\'ma;+^@D}23d+x'\U @\+:^;+'^('5'(@:a|d+*^ x'^!+xU:\+20:t\a;+'
+P: e players must collectively add and multiply numbers without any individual's knowing what exactly i
+
+C: d+}2'^!+:((2(+:^(+D@a\'ma'2("+I:a+J:}'^+:^(+/'tU:2a+i2^C83+(25'd2(+:+D@a\'m:3\;+t Dm@\'^!+1/WFH+d;d\
+P: s being added and multiplied. Tal Rabin and Michael Ben-Or devised a multiparty computing (MPC) syst
+
+C: 2D+\U:\+:aa xd+ma:;23d+\ +(2\2t\+('dU ^2d\;+ ^+\U2+m:3\+ .+\U2+(2:a23+ 3+ ^+m:3\+ .+@m+\ + ^2+\U'3(+
+P: em that allows players to detect dishonesty on the part of the dealer or on part of up to one third 
+
+C:  .+\U2+\U32dU a(+^@D}23+ .+ma:;23d?+252^+'.+\U d2+ma:;23d+:32+t  3('^:\2(+};+:^+l:(:m\'52l+:\\:t*23+
+P: of the threshold number of players, even if those players are coordinated by an "adaptive" attacker 
+
+C: xU +t:^+tU:^!2+d\3:\2!'2d+'^+32:a\'D2+(2m2^('^!+ ^+xU:\+'^. 3D:\' ^+U:d+}22^+3252:a2("
+P: who can change strategies in realtime depending on what information has been revealed.
+
+C: F Dm@\:\' ^:aa;+d2t@32+d2t32\+dU:3'^!
+P: Computationally secure secret sharing
+
+C: 
+P: 
+
+C: IU2+('d:(5:^\:!2+ .+@^t ^('\' ^:aa;+d2t@32+d2t32\+dU:3'^!+dtU2D2d+'d+\U:\+\U2+d\ 3:!2+:^(+\3:^dD'dd'
+P: The disadvantage of unconditionally secure secret sharing schemes is that the storage and transmissi
+
+C:  ^+ .+\U2+dU:32d+32>@'32d+:^+:D @^\+ .+d\ 3:!2+:^(+}:^(x'(\U+32d @3t2d+2>@'5:a2^\+\ +\U2+d'b2+ .+\U2
+P: on of the shares requires an amount of storage and bandwidth resources equivalent to the size of the
+
+C: +d2t32\+\'D2d+\U2+^@D}23+ .+dU:32d"+w.+\U2+d'b2+ .+\U2+d2t32\+x232+d'!^'.'t:^\?+d:;+R+]i?+:^(+\U2+^@
+P:  secret times the number of shares. If the size of the secret were significant, say 1 GB, and the nu
+
+C: D}23+ .+dU:32d+x232+RE?+\U2^+RE+]i+ .+(:\:+D@d\+}2+d\ 32(+};+\U2+dU:32U a(23d"+ka\23^:\2+\2tU^'>@2d+
+P: mber of shares were 10, then 10 GB of data must be stored by the shareholders. Alternate techniques 
+
+C: U:52+}22^+m3 m d2(+. 3+!32:\a;+'^t32:d'^!+\U2+2..'t'2^t;+ .+d2t32\+dU:3'^!+dtU2D2d?+};+!'5'^!+@m+\U2
+P: have been proposed for greatly increasing the efficiency of secret sharing schemes, by giving up the
+
+C: +32>@'32D2^\+ .+@^t ^('\' ^:a+d2t@3'\;"
+P:  requirement of unconditional security.
+
+C: 
+P: 
+
+C: 8^2+ .+\U2d2+\2tU^'>@2d?+*^ x^+:d+d2t32\+dU:3'^!+D:(2+dU 3\?pN9+t D}'^2d+J:}'^|d+'^. 3D:\' ^+('dm23d
+P: One of these techniques, known as secret sharing made short,[3] combines Rabin's information dispers
+
+C: :a+:a! 3'\UDpB9+1wSkH+x'\U+$U:D'3|d+d2t32\+dU:3'^!"+S:\:+'d+.'3d\+2^t3;m\2(+x'\U+:+3:^( Da;+!2^23:\2
+P: al algorithm[4] (IDA) with Shamir's secret sharing. Data is first encrypted with a randomly generate
+
+C: (+*2;?+@d'^!+:+d;DD2\3't+2^t3;m\' ^+:a! 3'\UD"+Y20\+\U'd+(:\:+'d+dma'\+'^\ +Y+m'2t2d+@d'^!+J:}'^|d+w
+P: d key, using a symmetric encryption algorithm. Next this data is split into N pieces using Rabin's I
+
+C: Sk"+IU'd+wSk+'d+t ^.'!@32(+x'\U+:+\U32dU a(?+'^+:+D:^^23+d'D'a:3+\ +d2t32\+dU:3'^!+dtU2D2d?+}@\+@^a'
+P: DA. This IDA is configured with a threshold, in a manner similar to secret sharing schemes, but unli
+
+C: *2+d2t32\+dU:3'^!+dtU2D2d+\U2+d'b2+ .+\U2+32d@a\'^!+(:\:+!3 xd+};+:+.:t\ 3+ .+1^@D}23+ .+.3:!D2^\d+r
+P: ke secret sharing schemes the size of the resulting data grows by a factor of (number of fragments /
+
+C: +\U32dU a(H"+y 3+20:Dma2?+'.+\U2+\U32dU a(+x232+RE?+:^(+\U2+^@D}23+ .+wSkCm3 (@t2(+.3:!D2^\d+x232+R&
+P:  threshold). For example, if the threshold were 10, and the number of IDA-produced fragments were 15
+
+C: ?+\U2+\ \:a+d'b2+ .+:aa+\U2+.3:!D2^\d+x @a(+}2+1R&rREH+ 3+R"&+\'D2d+\U2+d'b2+ .+\U2+ 3'!'^:a+'^m@\"+
+P: , the total size of all the fragments would be (15/10) or 1.5 times the size of the original input. 
+
+C: w^+\U'd+t:d2?+\U'd+dtU2D2+'d+RE+\'D2d+D 32+2..'t'2^\+\U:^+'.+$U:D'3|d+dtU2D2+U:(+}22^+:mma'2(+('32t\
+P: In this case, this scheme is 10 times more efficient than if Shamir's scheme had been applied direct
+
+C: a;+ ^+\U2+(:\:"+IU2+.'^:a+d\2m+'^+d2t32\+dU:3'^!+D:(2+dU 3\+'d+\ +@d2+$U:D'3+d2t32\+dU:3'^!+\ +m3 (@
+P: ly on the data. The final step in secret sharing made short is to use Shamir secret sharing to produ
+
+C: t2+dU:32d+ .+\U2+3:^( Da;+!2^23:\2(+d;DD2\3't+*2;+1xU'tU+'d+\;m't:aa;+ ^+\U2+ 3(23+ .+R[N`+};\2dH+:^
+P: ce shares of the randomly generated symmetric key (which is typically on the order of 1632 bytes) an
+
+C: (+\U2^+!'52+ ^2+dU:32+:^(+ ^2+.3:!D2^\+\ +2:tU+dU:32U a(23"
+P: d then give one share and one fragment to each shareholder.
+
+C: 
+P: 
+
+C: k+32a:\2(+:mm3 :tU?+*^ x^+:d+k8YICJ$?p&9+:mma'2d+:^+kaaC 3C^ \U'^!+\3:^d. 3D+\ +\U2+(:\:+:d+:+m32Cm3
+P: A related approach, known as AONT-RS,[5] applies an All-or-nothing transform to the data as a pre-pr
+
+C:  t2dd'^!+d\2m+\ +:^+wSk"+IU2+kaaC 3C^ \U'^!+\3:^d. 3D+!@:3:^\22d+\U:\+:^;+^@D}23+ .+dU:32d+a2dd+\U:^
+P: ocessing step to an IDA. The All-or-nothing transform guarantees that any number of shares less than
+
+C: +\U2+\U32dU a(+'d+'^d@..'t'2^\+\ +(2t3;m\+\U2+(:\:"
+P:  the threshold is insufficient to decrypt the data.
+
+C: /@a\'Cd2t32\+:^(+dm:t2+2..'t'2^\+1}:\tU2(H+d2t32\+dU:3'^!
+P: Multi-secret and space efficient (batched) secret sharing
+
+C: 
+P: 
+
+C: k^+'^. 3D:\' ^C\U2 32\'t:aa;+d2t@32+*C .C^+d2t32\CdU:3'^!+dtU2D2+!2^23:\2d+^+dU:32d?+2:tU+ .+d'b2+:\
+P: An information-theoretically secure k-of-n secret-sharing scheme generates n shares, each of size at
+
+C: +a2:d\+\U:\+ .+\U2+d2t32\+'\d2a.?+a2:('^!+\ +\U2+\ \:a+32>@'32(+d\ 3:!2+}2'^!+:\+a2:d\+^C. a(+a:3!23
+P:  least that of the secret itself, leading to the total required storage being at least n-fold larger
+
+C: +\U:\+\U2+d2t32\"+w^+D@a\'Cd2t32\+dU:3'^!+(2d'!^2(+};+/:\\U2x+7"+y3:^*a'^+:^(+/ \'+h@^!?p[9+D@a\'ma2
+P:  that the secret. In multi-secret sharing designed by Matthew K. Franklin and Moti Yung,[6] multiple
+
+C: +m '^\d+ .+\U2+m a;^ D':a+U d\+d2t32\dX+\U2+D2\U (+x:d+. @^(+@d2.@a+'^+^@D23 @d+:mma't:\' ^d+.3 D+t 
+P:  points of the polynomial host secrets; the method was found useful in numerous applications from co
+
+C: ('^!+\ +D@a\'Cm:3\;+t Dm@\:\' ^d"+w^+dm:t2+2..'t'2^\+d2t32\+dU:3'^!?+(25'd2(+};+k}U'dU2*+W:3:*U+:^(+
+P: ding to multi-party computations. In space efficient secret sharing, devised by Abhishek Parakh and 
+
+C: $@}U:dU+7:*?+2:tU+dU:32+'d+3 @!Ua;+\U2+.3:t\' ^+1*CRH+ .+\U2+d'b2+ .+\U2+d2t32\"pV9
+P: Subhash Kak, each share is roughly the fraction (k-1) of the size of the secret.[7]
+
+C: 
+P: 
+
+C: IU'd+dtU2D2+D:*2d+@d2+ .+32m2:\2(+m a;^ D':a+'^\23m a:\' ^+:^(+U:d+m \2^\':a+:mma't:\' ^d+'^+d2t@32+
+P: This scheme makes use of repeated polynomial interpolation and has potential applications in secure 
+
+C: '^. 3D:\' ^+('dm23d:a+ ^+\U2+G2}+:^(+'^+d2^d 3+^2\x 3*d"+IU'd+D2\U (+'d+}:d2(+ ^+(:\:+m:3\'\' ^'^!+'
+P: information dispersal on the Web and in sensor networks. This method is based on data partitioning i
+
+C: ^5 a5'^!+\U2+3  \d+ .+:+m a;^ D':a+'^+.'^'\2+.'2a("ps9+$ D2+5@a^23:}'a'\'2d+ .+32a:\2(+dm:t2+2..'t'2
+P: nvolving the roots of a polynomial in finite field.[8] Some vulnerabilities of related space efficie
+
+C: ^\+d2t32\+dU:3'^!+dtU2D2d+x232+m '^\2(+ @\+a:\23"p{9+IU2;+dU x+\U:\+:+dtU2D2+}:d2(+ ^+'^\23m a:\' ^+
+P: nt secret sharing schemes were pointed out later.[9] They show that a scheme based on interpolation 
+
+C: D2\U (+t:^^ \+}2+@d2(+\ +'Dma2D2^\+:+1*?+^H+dtU2D2+xU2^+\U2+*+d2t32\d+\ +}2+('d\3'}@\2(+:32+'^U232^\
+P: method cannot be used to implement a (k, n) scheme when the k secrets to be distributed are inherent
+
+C: a;+!2^23:\2(+.3 D+:+m a;^ D':a+ .+(2!322+a2dd+\U:^+*++R?+:^(+\U2+dtU2D2+( 2d+^ \+x 3*+'.+:aa+ .+\U2+
+P: ly generated from a polynomial of degree less than k  1, and the scheme does not work if all of the 
+
+C: d2t32\d+\ +}2+dU:32(+:32+\U2+d:D2?+2\t"pRE9
+P: secrets to be shared are the same, etc.[10]
+
+C: 8\U23+@d2d+:^(+:mma't:\' ^d
+P: Other uses and applications
+
+C: 
+P: 
+
+C: k+d2t32\+dU:3'^!+dtU2D2+t:^+d2t@32+:+d2t32\+ 523+D@a\'ma2+d23523d+:^(+32D:'^+32t 523:}a2+(2dm'\2+D@a
+P: A secret sharing scheme can secure a secret over multiple servers and remain recoverable despite mul
+
+C: \'ma2+d23523+.:'a@32d"+IU2+(2:a23+D:;+:t\+:d+d2523:a+('d\'^t\+m:3\'t'm:^\d?+('d\3'}@\'^!+\U2+dU:32d+
+P: tiple server failures. The dealer may act as several distinct participants, distributing the shares 
+
+C: :D ^!+\U2+m:3\'t'm:^\d"+v:tU+dU:32+D:;+}2+d\ 32(+ ^+:+('..232^\+d23523?+}@\+\U2+(2:a23+t:^+32t 523+\
+P: among the participants. Each share may be stored on a different server, but the dealer can recover t
+
+C: U2+d2t32\+252^+'.+d2523:a+d23523d+}32:*+( x^+:d+a ^!+:d+\U2;+t:^+32t 523+:\+a2:d\+\+dU:32dX+U x2523?
+P: he secret even if several servers break down as long as they can recover at least t shares; however,
+
+C: +t3:t*23d+\U:\+}32:*+'^\ + ^2+d23523+x @a(+d\'aa+^ \+*^ x+\U2+d2t32\+:d+a ^!+:d+.2x23+\U:^+\+dU:32d+
+P:  crackers that break into one server would still not know the secret as long as fewer than t shares 
+
+C: :32+d\ 32(+ ^+2:tU+d23523"
+P: are stored on each server.
+
+C: 
+P: 
+
+C: IU'd+'d+ ^2+ .+\U2+D:T 3+t ^t2m\d+}2U'^(+\U2+P:^'dU+t Dm@\23+m3 T2t\+:\+\U2+g^'523d'\;+ .+G:dU'^!\ ^
+P: This is one of the major concepts behind the Vanish computer project at the University of Washington
+
+C: ?+xU232+:+3:^( D+*2;+'d+@d2(+\ +2^t3;m\+(:\:?+:^(+\U2+*2;+'d+('d\3'}@\2(+:d+:+d2t32\+:t3 dd+d2523:a+
+P: , where a random key is used to encrypt data, and the key is distributed as a secret across several 
+
+C: ^ (2d+'^+:+W`W+^2\x 3*"+w^+ 3(23+\ +(2t3;m\+\U2+D2dd:!2?+:\+a2:d\+\+^ (2d+ ^+\U2+^2\x 3*+D@d\+}2+:tt
+P: nodes in a P2P network. In order to decrypt the message, at least t nodes on the network must be acc
+
+C: 2dd'}a2X+\U2+m3'^t'ma2+. 3+\U'd+m:3\'t@a:3+m3 T2t\+}2'^!+\U:\+\U2+^@D}23+ .+d2t32\CdU:3'^!+^ (2d+ ^+
+P: essible; the principle for this particular project being that the number of secret-sharing nodes on 
+
+C: \U2+^2\x 3*+x'aa+(2t32:d2+^:\@3:aa;+ 523+\'D2?+\U232. 32+t:@d'^!+\U2+d2t32\+\ +252^\@:aa;+5:^'dU"+, 
+P: the network will decrease naturally over time, therefore causing the secret to eventually vanish. Ho
+
+C: x2523?+\U2+^2\x 3*+'d+5@a^23:}a2+\ +:+$;}'a+:\\:t*?+\U@d+D:*'^!+P:^'dU+'^d2t@32"pRR9
+P: wever, the network is vulnerable to a Sybil attack, thus making Vanish insecure.[11]
+
+C: 
+P: 
+
+C: k^;+dU:32U a(23+xU +2523+U:d+2^ @!U+'^. 3D:\' ^+\ +(2t3;m\+\U2+t ^\2^\+:\+:^;+m '^\+'d+:}a2+\ +\:*2+
+P: Any shareholder who ever has enough information to decrypt the content at any point is able to take 
+
+C: :^(+d\ 32+:+t m;+ .+4"+F ^d2>@2^\a;?+:a\U @!U+\  ad+:^(+\2tU^'>@2d+d@tU+:d+P:^'dU+t:^+D:*2+(:\:+'332
+P: and store a copy of X. Consequently, although tools and techniques such as Vanish can make data irre
+
+C: t 523:}a2+x'\U'^+\U2'3+ x^+d;d\2D+:.\23+:+\'D2?+'\+'d+^ \+m dd'}a2+\ +. 3t2+\U2+(2a2\' ^+ .+(:\:+ ^t
+P: coverable within their own system after a time, it is not possible to force the deletion of data onc
+
+C: 2+:+D:a't' @d+@d23+U:d+d22^+'\"+IU'd+'d+ ^2+ .+\U2+a2:('^!+t ^@^(3@Dd+ .+S'!'\:a+J'!U\d+/:^:!2D2^\"
+P: e a malicious user has seen it. This is one of the leading conundrums of Digital Rights Management.
+
+C: 
+P: 
+
+C: k+(2:a23+t @a(+d2^(+\+dU:32d?+:aa+ .+xU'tU+:32+^2t2dd:3;+\ +32t 523+\U2+ 3'!'^:a+d2t32\?+\ +:+d'^!a2
+P: A dealer could send t shares, all of which are necessary to recover the original secret, to a single
+
+C: +32t'm'2^\"+k^+:\\:t*23+x @a(+U:52+\ +'^\23t2m\+:aa+\+dU:32d+\ +32t 523+\U2+d2t32\?+:+\:d*+xU'tU+'d+
+P:  recipient. An attacker would have to intercept all t shares to recover the secret, a task which is 
+
+C: D 32+('..'t@a\+\U:^+'^\23t2m\'^!+:+d'^!a2+.'a2?+2dm2t':aa;+'.+\U2+dU:32d+:32+d2^\+@d'^!+('..232^\+D2
+P: more difficult than intercepting a single file, especially if the shares are sent using different me
+
+C: (':+12"!"+d D2+ 523+\U2+w^\23^2\?+d D2+D:'a2(+ ^+FSdH"
+P: dia (e.g. some over the Internet, some mailed on CDs).
+
+C: 
+P: 
+
+C: y 3+a:3!2+d2t32\d?+'\+D:;+}2+D 32+2..'t'2^\+\ +2^t3;m\+\U2+d2t32\+:^(+\U2^+('d\3'}@\2+\U2+*2;+@d'^!+
+P: For large secrets, it may be more efficient to encrypt the secret and then distribute the key using 
+
+C: d2t32\+dU:3'^!"
+P: secret sharing.
+
+C: 
+P: 
+
+C: $2t32\+dU:3'^!+'d+:^+'Dm 3\:^\+m3'D'\'52+'^+d2523:a+m3 \ t ad+. 3+d2t@32+D@a\'m:3\;+t Dm@\:\' ^"+$2t
+P: Secret sharing is an important primitive in several protocols for secure multiparty computation. Sec
+
+C: 32\+dU:3'^!+t:^+:ad +}2+@d2(+. 3+@d23+:@\U2^\'t:\' ^+'^+:+d;d\2D"pR`9+P: ret sharing can also be used for user authentication in a system.[12] 

@@ -1,0 +1,261 @@
+> add 2 e
+Added: '2' -> 'e'
+> add   o
+Added: ' ' -> 'o'
+> generate
+Generated output.txt
+> add \ t
+Added: '\' -> 't'
+> add U h
+Added: 'U' -> 'h'
+> add 3 r
+Added: '3' -> 'r'
+> add . f
+Added: '.' -> 'f'
+> generate
+Generated output.txt
+> add d s
+Added: 'd' -> 's'
+> generate
+Generated output.txt
+> add t c
+Added: 't' -> 'c'
+> generate
+Generated output.txt
+> add : a
+Added: ':' -> 'a'
+> generate
+Generated output.txt
+> add I T
+Added: 'I' -> 'T'
+> add " . 
+Added: '"' -> '.'
+> generate
+Generated output.txt
+> add ^ n
+Added: '^' -> 'n'
+> add } b
+Added: '}' -> 'b'
+> generate
+Generated output.txt
+> add @ u
+Added: '@' -> 'u'
+> add ' i
+Added: ''' -> 'i'
+> generate
+Generated output.txt
+> add D m
+Added: 'D' -> 'm'
+> add ( d
+Added: '(' -> 'd'
+> generate
+Generated output.txt
+> add a l
+Added: 'a' -> 'l'
+> add ; y
+Added: ';' -> 'y'
+> add x w
+Added: 'x' -> 'w'
+> generate
+Generated output.txt
+> add $ S
+Added: '$' -> 'S'
+> add ! g
+Added: '!' -> 'g'
+> generate
+Generated output.txt
+> add m p
+Added: 'm' -> 'p'
+> generaye
+Unknown command. Try: add, remove, show, generate, quit
+> generate
+Generated output.txt
+> add 1 (
+Added: '1' -> '('
+> add H )
+Added: 'H' -> ')'
+> generate
+Generated output.txt
+> add ? ,
+Added: '?' -> ','
+> generate
+Generated output.txt
+> add 5 v
+Added: '5' -> 'v'
+> generate
+Generated output.txt
+> add * k
+Added: '*' -> 'k'
+> generate
+Generated output.txt
+> add w i
+Added: 'w' -> 'i'
+> add 0 x
+Added: '0' -> 'x'
+> generate
+Generated output.txt
+> add F C
+Added: 'F' -> 'C'
+> add > q
+Added: '>' -> 'q'
+> generate
+Generated output.txt
+> add P V
+Added: 'P' -> 'V'
+> add S D
+Added: 'S' -> 'D'
+> add J R
+Added: 'J' -> 'R'
+> add / M
+Added: '/' -> 'M'
+> generate
+Generated output.txt
+> add k A
+Added: 'k' -> 'A'
+> generate
+Generated output.txt
+> add 4 X
+Added: '4' -> 'X'
+> generate
+Generated output.txt
+> add , H
+Added: ',' -> 'H'
+> generate
+Generated output.txt
+> add W P
+Added: 'W' -> 'P'
+> add ` 2
+Added: '`' -> '2'
+> generate
+Generated output.txt
+> add T j
+Added: 'T' -> 'j'
+> generae
+Unknown command. Try: add, remove, show, generate, quit
+> generate
+Generated output.txt
+> add C -
+Added: 'C' -> '-'
+> generate
+Generated output.txt
+> show   
+
+> add w I
+Added: 'w' -> 'I'
+
+> generate
+Generated output.txt
+> add p [
+Added: 'p' -> '['
+> add 9 ]
+Added: '9' -> ']'
+> generate
+Generated output.txt
+> add ] G
+Added: ']' -> 'G'
+> add i B
+Added: 'i' -> 'B'
+> generate
+Generated output.txt
+> add R 1
+Added: 'R' -> '1'
+> add { 9
+Added: '{' -> '9'
+> add V 7
+Added: 'V' -> '7'
+> generate
+Generated output.txt
+> add l "
+Added: 'l' -> '"'
+> generate
+Generated output.txt
+> add Z L
+Added: 'Z' -> 'L'
+> generate
+Generated output.txt
+> add z =
+Added: 'z' -> '='
+> add M <
+Added: 'M' -> '<'
+> generate
+Generated output.txt
+> add _ {
+Added: '_' -> '{'
+> add 6 }
+Added: '6' -> '}'
+> generate
+Generated output.txt
+> add v E
+Added: 'v' -> 'E'
+> generate
+Generated output.txt
+> add | '
+Added: '|' -> '''
+> generate
+Generated output.txt
+> add g U
+Added: 'g' -> 'U'
+> add N 3
+Added: 'N' -> '3'
+> generate
+Generated output.txt
+> add 8 O
+Added: '8' -> 'O'
+> add E 0
+Added: 'E' -> '0'
+> add s 8
+Added: 's' -> '8'
+> add [ 6
+Added: '[' -> '6'
+> add B 4
+Added: 'B' -> '4'
+> add & 5
+Added: '&' -> '5'
+> generate
+Generated output.txt
+> add e :
+Added: 'e' -> ':'
+> generate
+Generated output.txt
+> add X ;
+Added: 'X' -> ';'
+> generate
+Generated output.txt
+> add A Q
+Added: 'A' -> 'Q'
+> add - J
+Added: '-' -> 'J'
+> add Y N
+Added: 'Y' -> 'N'
+> generate
+Generated output.txt
+> add b z
+Added: 'b' -> 'z'
+> generate
+Generated output.txt
+> add 7 K
+Added: '7' -> 'K'
+> add y F
+Added: 'y' -> 'F'
+> add h Y
+Added: 'h' -> 'Y'
+> generate
+Generated output.txt
+> add G W
+Added: 'G' -> 'W'
+> generate
+Generated output.txt
+> add L \
+Added: 'L' -> '\'
+> generate
+Generated output.txt
+> add K ^
+Added: 'K' -> '^'
+> generate
+Generated output.txt
+> add n _
+Added: 'n' -> '_'
+> generate
+Generated output.txt
+> add r /
+Added: 'r' -> '/'
